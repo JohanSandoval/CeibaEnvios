@@ -3,7 +3,7 @@ package com.ceiba.envio.modelo.entidad;
 import lombok.Data;
 import lombok.Getter;
 
-import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
+import static com.ceiba.dominio.ValidadorArgumento.*;
 
 @Getter
 public class Envio {
@@ -15,7 +15,10 @@ public class Envio {
 	private static final String SE_DEBE_INGRESAR_UNA_CIUDAD_DE_ORIGEN = "Se debe asignar una ciudad de origen";
 	private static final String SE_DEBE_INGRESAR_UNA_CIUDAD_DE_DESTINO = "Se debe asignar una ciudad de destino";
 
-	private static final String SE_DEBE_INGRESAR_UN_PESO = "Se debe ingresar un peso";
+	private static final String SE_DEBE_INGRESAR_UN_PESO_MENOR_50 = "Se debe ingresar un peso menor a 50 kg";
+	private static final String SE_DEBE_INGRESAR_UN_PESO_POSITIVO = "Se debe ingresar un peso positivo";
+
+	private static final Long PESO_DEBE_SER_MENOR_A_50 = 50L;
 
 	private Long id;
 	private String nombre;
@@ -36,7 +39,8 @@ public class Envio {
 		validarObligatorio(telefono, SE_DEBE_INGRESAR_UN_TELEFONO_CONTACTO);
 		validarObligatorio(ciudadOrigen, SE_DEBE_INGRESAR_UNA_CIUDAD_DE_ORIGEN);
 		validarObligatorio(ciudadDestino, SE_DEBE_INGRESAR_UNA_CIUDAD_DE_DESTINO);
-		validarObligatorio(peso, SE_DEBE_INGRESAR_UN_PESO);
+		validarMenor((long) peso, PESO_DEBE_SER_MENOR_A_50, SE_DEBE_INGRESAR_UN_PESO_MENOR_50);
+		validarPositivo(peso, SE_DEBE_INGRESAR_UN_PESO_POSITIVO);
 
 		this.nombre = nombre;
 		this.apellido = apellido;
